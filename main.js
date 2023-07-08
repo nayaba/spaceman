@@ -96,9 +96,10 @@ function renderBoard() {
 // Game play
 function compareLetters(evt) {
   let letter = evt.target.id
-  console.log('clicked letter: ', letter)
-  if (word.includes(letter)) {
-    console.log(`${letter} is in the word`)
+  if (wordArr.includes(letter)) {
+    let index = wordArr.indexOf(letter)
+    underscoresArr[index] = letter
+    board.innerHTML = underscoresArr.join(' ')
   } else {
     console.log(`${letter} is not in the word`)
   }
