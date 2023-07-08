@@ -3,6 +3,7 @@ const image = document.getElementById('image')
 const board = document.getElementById('board')
 const letterBank = document.getElementById('letter-bank')
 const playAgain = document.getElementById('play-again')
+const createdDivsArr = []
 let underscoresArr = []
 let btn
 let counter
@@ -57,6 +58,7 @@ const wordsArr = [
 // Create a clickable letter bank
 lettersArr.forEach((letter) => {
   let createdDiv = createLetterDiv(letter)
+  createdDivsArr.push(createdDiv)
   makeClickable(createdDiv, compareLetters)
 })
 
@@ -124,6 +126,10 @@ function checkGameOver() {
   } else {
     updateMessage('GAME OVER!')
     playAgain.style.visibility = "visible"
+    // letterDivsArr = [...letterBank.children] 
+    createdDivsArr.forEach(div => {
+      div.removeEventListener('click', compareLetters)
+    })
   }
 }
 
@@ -140,9 +146,11 @@ function init() {
 function restart() {
   underscoresArr = []
   playAgain.style.visibility = "hidden"
+  createdDivsArr.forEach(div => {
+    makeClickable(div, compareLetters)
+  })
   init()
 }
 
 init()
-
 
