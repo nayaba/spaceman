@@ -35,6 +35,7 @@ const lettersArr = [
 lettersArr.forEach(letter => {
   let letterDiv = document.createElement('div')
   letterDiv.id = letter
+  letterDiv.className = 'letters'
   letterDiv.innerHTML = letter
   letterBank.appendChild(letterDiv)
 })
