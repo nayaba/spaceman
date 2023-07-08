@@ -120,15 +120,17 @@ function compareLetters(evt) {
     drawSpacemn(counter)
   }
   updateMessage(`${counter} attempts remaining`)
-  checkGameOver()
+  checkGameOver(evt.target)
 }
 
-function checkGameOver() {
+function checkGameOver(letter) {
   if (!underscoresArr.includes('_')) {
     updateMessage('YOU WIN!')
     playAgain.style.visibility = "visible"
     makeUnclickable(createdDivsArr)
   } else if (counter > 0) {
+    letter.removeEventListener('click', compareLetters)
+    letter.style.opacity = "0.5"
     return
   } else {
     updateMessage('GAME OVER!')
@@ -152,6 +154,7 @@ function restart() {
   playAgain.style.visibility = "hidden"
   createdDivsArr.forEach(div => {
     makeClickable(div, compareLetters)
+    div.style.opacity = "1"
   })
   init()
 }
