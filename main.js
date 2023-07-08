@@ -103,6 +103,12 @@ function chooseWord() {
   console.log('word: ', word)
 }
 
+function makeUnclickable(arr) {
+  arr.forEach(element => {
+    element.removeEventListener('click', compareLetters)
+  })
+}
+
 function compareLetters(evt) {
   let letter = evt.target.id
   if (wordArr.includes(letter)) {
@@ -121,17 +127,13 @@ function checkGameOver() {
   if (!underscoresArr.includes('_')) {
     updateMessage('YOU WIN!')
     playAgain.style.visibility = "visible"
-    createdDivsArr.forEach(div => {
-      div.removeEventListener('click', compareLetters)
-    })
+    makeUnclickable(createdDivsArr)
   } else if (counter > 0) {
     return
   } else {
     updateMessage('GAME OVER!')
     playAgain.style.visibility = "visible"
-    createdDivsArr.forEach(div => {
-      div.removeEventListener('click', compareLetters)
-    })
+    makeUnclickable(createdDivsArr)
   }
 }
 
