@@ -32,10 +32,47 @@ const lettersArr = [
   'Z'
 ]
 
+const words = [
+  'got',
+  'ability',
+  'shop',
+  'recall',
+  'fruit',
+  'easy',
+  'dirty',
+  'giant',
+  'shaking',
+  'ground',
+  'weather',
+  'lesson',
+  'almost',
+  'square',
+  'forward',
+  'bend',
+  'cold',
+  'broken',
+  'distant',
+  'adjective.'
+]
+
 lettersArr.forEach(letter => {
+  let createdDiv = createLetterDiv(letter)
+  makeClickable(createdDiv, test)
+})
+
+function createLetterDiv (letter) {
   let letterDiv = document.createElement('div')
   letterDiv.id = letter
   letterDiv.className = 'letters'
   letterDiv.innerHTML = letter
   letterBank.appendChild(letterDiv)
-})
+  return letterDiv
+}
+
+function makeClickable(element, func) {
+ element.addEventListener('click', func)
+}
+
+function test(event) {
+  console.log('event: ', event.target)
+}
