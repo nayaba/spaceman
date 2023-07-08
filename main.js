@@ -2,9 +2,10 @@ const message = document.getElementById('message')
 const image = document.getElementById('image')
 const board = document.getElementById('board')
 const letterBank = document.getElementById('letter-bank')
+let underscoresArr = []
+let counter
 let word
 let wordArr
-let underscoresArr = []
 
 const lettersArr = [
   'A',
@@ -58,14 +59,13 @@ const wordsArr = [
   'ADJECTIVE'
 ]
 
-
 // Create a clickable letter bank
-lettersArr.forEach(letter => {
+lettersArr.forEach((letter) => {
   let createdDiv = createLetterDiv(letter)
   makeClickable(createdDiv, compareLetters)
 })
 
-function createLetterDiv (letter) {
+function createLetterDiv(letter) {
   let letterDiv = document.createElement('div')
   letterDiv.id = letter
   letterDiv.innerHTML = letter
@@ -75,14 +75,13 @@ function createLetterDiv (letter) {
 }
 
 function makeClickable(element, func) {
- element.addEventListener('click', func)
+  element.addEventListener('click', func)
 }
-
 
 // Render functions
 function renderBoard() {
   wordArr = [...word]
-  wordArr.forEach(letter => {
+  wordArr.forEach((letter) => {
     underscoresArr.push('_')
   })
   updateBoard()
@@ -108,15 +107,26 @@ function compareLetters(evt) {
     let index = wordArr.indexOf(letter)
     underscoresArr[index] = letter
     updateBoard()
-    updateMessage(`Good guess!  ${letter} is in the word.`)
+    updateMessage(`Good guess!  ${counter} attempts remaining`)
   } else {
-    updateMessage(`Sorry, ${letter} is not in the word.`)
+    counter--
+    updateMessage(`Try again! ${counter} attempts remaining`)
+  }
+  checkGameOver()
+}
+
+function checkGameOver() {
+  if (counter > 0) {
+    return
+  } else {
+    updateMessage('GAME OVER!')
   }
 }
 
-
 // Start game play
-function init () {
+function init() {
+  counter = 7
+  updateMessage(`${counter} attempts remaining`)
   chooseWord()
   renderBoard()
 }
