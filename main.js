@@ -2,7 +2,9 @@ const message = document.getElementById('message')
 const image = document.getElementById('image')
 const board = document.getElementById('board')
 const letterBank = document.getElementById('letter-bank')
+const playAgain = document.getElementById('play-again')
 let underscoresArr = []
+let btn
 let counter
 let word
 let wordArr
@@ -95,6 +97,13 @@ function updateMessage(text) {
   message.innerHTML = text
 }
 
+// function createButton(text) {
+//   btn = document.createElement('button')
+//   btn.innerText = text
+//   button.appendChild(btn)
+//   makeClickable(btn, restart)
+// }
+
 // Game play
 function chooseWord() {
   word = wordsArr[Math.floor(Math.random() * wordsArr.length)]
@@ -118,19 +127,28 @@ function compareLetters(evt) {
 function checkGameOver() {
   if (!underscoresArr.includes('_')) {
     updateMessage('YOU WIN!')
+    playAgain.style.visibility = "visible"
   } else if (counter > 0) {
     return
   } else {
     updateMessage('GAME OVER!')
+    playAgain.style.visibility = "visible"
   }
 }
 
 // Start game play
 function init() {
   counter = 7
+  makeClickable(playAgain, restart)
   updateMessage(`${counter} attempts remaining`)
   chooseWord()
   renderBoard()
+}
+
+function restart() {
+  underscoresArr = []
+  playAgain.style.visibility = "hidden"
+  init()
 }
 
 init()
