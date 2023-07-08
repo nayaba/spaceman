@@ -116,7 +116,9 @@ function compareLetters(evt) {
 }
 
 function checkGameOver() {
-  if (counter > 0) {
+  if (!underscoresArr.includes('_')) {
+    updateMessage('YOU WIN!')
+  } else if (counter > 0) {
     return
   } else {
     updateMessage('GAME OVER!')
