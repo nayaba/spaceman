@@ -79,29 +79,38 @@ function makeClickable(element, func) {
 }
 
 
-// Create blank gameboard
-function chooseWord() {
-  word = wordsArr[Math.floor(Math.random() * wordsArr.length)]
-  console.log('word: ', word)
-}
-
+// Render functions
 function renderBoard() {
   wordArr = [...word]
   wordArr.forEach(letter => {
     underscoresArr.push('_')
   })
+  updateBoard()
+}
+
+function updateBoard() {
   board.innerHTML = underscoresArr.join(' ')
 }
 
+function updateMessage(text) {
+  message.innerHTML = text
+}
+
 // Game play
+function chooseWord() {
+  word = wordsArr[Math.floor(Math.random() * wordsArr.length)]
+  console.log('word: ', word)
+}
+
 function compareLetters(evt) {
   let letter = evt.target.id
   if (wordArr.includes(letter)) {
     let index = wordArr.indexOf(letter)
     underscoresArr[index] = letter
-    board.innerHTML = underscoresArr.join(' ')
+    updateBoard()
+    updateMessage(`Good guess!  ${letter} is in the word.`)
   } else {
-    console.log(`${letter} is not in the word`)
+    updateMessage(`Sorry, ${letter} is not in the word.`)
   }
 }
 
