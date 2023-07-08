@@ -20,6 +20,11 @@ body {
   color: white;
 }
 
+#image > img {
+  width: auto; 
+  height: 50vw; 
+  }
+
 #board {
   font-size: 5vw;
   font-weight: bold;

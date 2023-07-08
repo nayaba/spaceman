@@ -40,25 +40,18 @@ const lettersArr = [
 
 const wordsArr = [
   'GOT',
-  'ABILITY',
   'SHOP',
-  'RECALL',
   'FRUIT',
   'EASY',
   'DIRTY',
   'GIANT',
   'SHAKING',
   'GROUND',
-  'WEATHER',
-  'LESSON',
   'ALMOST',
   'SQUARE',
-  'FORWARD',
   'BEND',
   'COLD',
   'BROKEN',
-  'DISTANT',
-  'ADJECTIVE'
 ]
 
 // Create a clickable letter bank
@@ -97,12 +90,10 @@ function updateMessage(text) {
   message.innerHTML = text
 }
 
-// function createButton(text) {
-//   btn = document.createElement('button')
-//   btn.innerText = text
-//   button.appendChild(btn)
-//   makeClickable(btn, restart)
-// }
+function drawSpacemn(attempt) {
+  image.innerHTML = `<img src="images/${attempt}.png" />`
+}
+
 
 // Game play
 function chooseWord() {
@@ -116,11 +107,11 @@ function compareLetters(evt) {
     let index = wordArr.indexOf(letter)
     underscoresArr[index] = letter
     updateBoard()
-    updateMessage(`Good guess!  ${counter} attempts remaining`)
   } else {
     counter--
-    updateMessage(`Try again! ${counter} attempts remaining`)
+    drawSpacemn(counter)
   }
+  updateMessage(`${counter} attempts remaining`)
   checkGameOver()
 }
 
@@ -138,7 +129,8 @@ function checkGameOver() {
 
 // Start game play
 function init() {
-  counter = 7
+  counter = 6
+  drawSpacemn(counter)
   makeClickable(playAgain, restart)
   updateMessage(`${counter} attempts remaining`)
   chooseWord()
@@ -152,3 +144,5 @@ function restart() {
 }
 
 init()
+
+
