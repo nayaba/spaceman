@@ -62,7 +62,7 @@ const wordsArr = [
 // Create a clickable letter bank
 lettersArr.forEach(letter => {
   let createdDiv = createLetterDiv(letter)
-  makeClickable(createdDiv, test)
+  makeClickable(createdDiv, compareLetters)
 })
 
 function createLetterDiv (letter) {
@@ -78,14 +78,11 @@ function makeClickable(element, func) {
  element.addEventListener('click', func)
 }
 
-function test(event) {
-  console.log('event: ', event.target)
-}
 
 // Create blank gameboard
 function chooseWord() {
   word = wordsArr[Math.floor(Math.random() * wordsArr.length)]
-  console.log(word)
+  console.log('word: ', word)
 }
 
 function renderBoard() {
@@ -94,6 +91,17 @@ function renderBoard() {
     underscoresArr.push('_')
   })
   board.innerHTML = underscoresArr.join(' ')
+}
+
+// Game play
+function compareLetters(evt) {
+  let letter = evt.target.id
+  console.log('clicked letter: ', letter)
+  if (word.includes(letter)) {
+    console.log(`${letter} is in the word`)
+  } else {
+    console.log(`${letter} is not in the word`)
+  }
 }
 
 
