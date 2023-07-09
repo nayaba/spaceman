@@ -123,6 +123,19 @@ function compareLetters(evt) {
   checkGameOver(evt.target)
 }
 
+function findMissingLetters() {
+  wordArr.forEach(letter => {
+   let found = underscoresArr.includes(letter)
+   if (!found) {
+    console.log('letter: ', letter)
+    let index = wordArr.indexOf(letter)
+    underscoresArr[index] = letter
+    updateBoard()
+   }
+  })
+}
+
+
 function checkGameOver(letter) {
   if (!underscoresArr.includes('_')) {
     updateMessage('YOU WIN!')
@@ -133,9 +146,11 @@ function checkGameOver(letter) {
     letter.style.opacity = "0.5"
     return
   } else {
-    updateMessage('GAME OVER!')
+    console.log(underscoresArr)
+    updateMessage(`GAME OVER! The word was ${word}`)
     playAgain.style.visibility = "visible"
     makeUnclickable(createdDivsArr)
+    findMissingLetters()
   }
 }
 
